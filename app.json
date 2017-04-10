@@ -5,7 +5,7 @@
     "go",
     "angularjs"
   ],
-  "image": "heroku/go:1.6",
+  "image": "heroku/go:1.8",
   "mount_dir": "src/github.com/kitensei/todo",
   "website": "http://github.com/kitensei/todo",
   "repository": "http://github.com/kitensei/todo"
