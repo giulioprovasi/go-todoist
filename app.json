@@ -1,12 +1,12 @@
 {
-  "name": "Todolist",
-  "description": "Golang/angularJS todolist app",
+  "name": "Todoist",
+  "description": "Golang/AngularJS Todo list app",
   "keywords": [
     "go",
     "angularjs"
   ],
   "image": "heroku/go:1.8",
-  "mount_dir": "src/github.com/kitensei/todo",
-  "website": "http://github.com/kitensei/todo",
-  "repository": "http://github.com/kitensei/todo"
+  "mount_dir": "src/github.com/kitensei/go-todoist",
+  "website": "http://github.com/kitensei/go-todoist",
+  "repository": "http://github.com/kitensei/go-todoist"
 }
