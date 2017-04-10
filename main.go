@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"github.com/kitensei/go-todoist/server"
-	"github.com/GeertJohan/go.rice"
 	"os"
 	"log"
 	"fmt"
