@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"todo/task"
+	"go-todoist/task"
 	"github.com/gorilla/mux"
 )
 
