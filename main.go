@@ -4,36 +4,19 @@ import (
 	"net/http"
 	"github.com/kitensei/go-todoist/server"
 	"os"
-	"log"
-	"fmt"
-	"path"
-	"strconv"
+	//"github.com/GeertJohan/go.rice"
 )
 
 var boxPrefix = getenv("BOXPATH", "")
 
 func main() {
-	dir, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("DIRECTORY CWD: " + dir)
-	ex, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-	exPath := path.Dir(ex)
-	fmt.Println("EXECUTABLE PATH: " + exPath)
-	exists, err := exists(boxPrefix + "static")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("CHECK IF (" + boxPrefix + "static) EXISTS: " + strconv.FormatBool(exists))
 	server.RegisterHandlers()
+	// go.rice causes issues on Heroku, but when editing on Vagrant must use this
 	//http.Handle("/", http.FileServer(rice.MustFindBox(boxPrefix + "static").HTTPBox()))
 	http.Handle("/", http.FileServer(http.Dir(boxPrefix+"static")))
+
+	// added for Heroku, let him chose the port used, or defaults to 8080
 	port := getenv("PORT", "8080")
-	fmt.Println("USED PORT: "+ port)
 	http.ListenAndServe(":" + port, nil)
 }
 
@@ -43,15 +26,4 @@ func getenv(key, fallback string) string {
 		return fallback
 	}
 	return value
-}
-
-func exists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return true, err
 }
