@@ -31,7 +31,8 @@ func main() {
 	}
 	fmt.Println("CHECK IF (" +boxPrefix + "static) EXISTS: " + strconv.FormatBool(exists))
 	server.RegisterHandlers()
-	http.Handle("/", http.FileServer(rice.MustFindBox(boxPrefix + "static").HTTPBox()))
+	//http.Handle("/", http.FileServer(rice.MustFindBox(boxPrefix + "static").HTTPBox()))
+	http.Handle("/", http.FileServer(http.Dir(boxPrefix + "static")))
 	http.ListenAndServe(":8080", nil)
 }
 
