@@ -28,11 +28,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("CHECK IF (" +boxPrefix + "static) EXISTS: " + strconv.FormatBool(exists))
+	fmt.Println("CHECK IF (" + boxPrefix + "static) EXISTS: " + strconv.FormatBool(exists))
 	server.RegisterHandlers()
 	//http.Handle("/", http.FileServer(rice.MustFindBox(boxPrefix + "static").HTTPBox()))
-	http.Handle("/", http.FileServer(http.Dir(boxPrefix + "static")))
-	http.ListenAndServe(":8080", nil)
+	http.Handle("/", http.FileServer(http.Dir(boxPrefix+"static")))
+	port := getenv("PORT", "8080")
+	fmt.Println("USED PORT: "+ port)
+	http.ListenAndServe(":" + port, nil)
 }
 
 func getenv(key, fallback string) string {

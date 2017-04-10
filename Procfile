@@ -1,1 +1,1 @@
-worker: go-todoist
+web: go-todoist
