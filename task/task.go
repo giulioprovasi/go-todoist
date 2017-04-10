@@ -45,6 +45,16 @@ func (m *TaskManager) Save(task *Task) error {
 	return fmt.Errorf("unknown task")
 }
 
+func (m *TaskManager) Remove(ID int64) error {
+	for i, t := range m.tasks {
+		if t.ID == ID {
+			m.tasks = append(m.tasks[:i], m.tasks[i+1:]...)
+			return nil
+		}
+	}
+	return fmt.Errorf("unknown task")
+}
+
 // cloneTask creates and returns a deep copy of the given Task.
 func cloneTask(t *Task) *Task {
 	c := *t

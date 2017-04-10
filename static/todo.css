@@ -81,3 +81,9 @@ li.done > .checkbox {
 .spinner.working {
 	display: block;
 }
+
+.rmicon {
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+}

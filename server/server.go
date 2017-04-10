@@ -20,6 +20,7 @@ func RegisterHandlers() {
 	r.HandleFunc(PathPrefix, errorHandler(NewTask)).Methods("POST")
 	r.HandleFunc(PathPrefix+"{id}", errorHandler(GetTask)).Methods("GET")
 	r.HandleFunc(PathPrefix+"{id}", errorHandler(UpdateTask)).Methods("PUT")
+	r.HandleFunc(PathPrefix+"{id}", errorHandler(RemoveTask)).Methods("DELETE")
 	http.Handle(PathPrefix, r)
 }
 
@@ -149,4 +150,24 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) error {
 		return notFound{}
 	}
 	return tasks.Save(&t)
+}
+
+// RemoveTask handles DELETE requests to /task/{taskID}.
+//
+// Example:
+//
+//   req: DELETE /task/1
+//   res: 200
+//
+//   req: DELETE /task/42
+//   res: 404 task not found
+func RemoveTask(w http.ResponseWriter, r *http.Request) error {
+	id, err := parseID(r)
+	if err != nil {
+		return badRequest{err}
+	}
+	if _, ok := tasks.Find(id); !ok {
+		return notFound{}
+	}
+	return tasks.Remove(id)
 }
