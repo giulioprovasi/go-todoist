@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"go-todoist/server"
+	"github.com/kitensei/go-todoist/server"
 	"github.com/GeertJohan/go.rice"
 )
 
