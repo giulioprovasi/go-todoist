@@ -33,5 +33,9 @@
 			"revisionTime": "2017-03-09T17:28:38Z"
 		}
 	],
-	"rootPath": "todo"
+	"rootPath": "github.com/kitensei/go-todoist",
+	"heroku": {
+		"install" : [ "./..." ],
+		"goVersion": "go1.8"
+	}
 }
