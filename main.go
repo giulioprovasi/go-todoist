@@ -8,6 +8,7 @@ import (
 	"log"
 	"fmt"
 	"path"
+	"strconv"
 )
 
 var boxPrefix = getenv("BOXPATH", "")
@@ -24,6 +25,11 @@ func main() {
 	}
 	exPath := path.Dir(ex)
 	fmt.Println("EXECUTABLE PATH: " + exPath)
+	exists, err := exists(boxPrefix + "static")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("CHECK IF (" +boxPrefix + "static) EXISTS: " + strconv.FormatBool(exists))
 	server.RegisterHandlers()
 	http.Handle("/", http.FileServer(rice.MustFindBox(boxPrefix + "static").HTTPBox()))
 	http.ListenAndServe(":8080", nil)
@@ -35,4 +41,15 @@ func getenv(key, fallback string) string {
 		return fallback
 	}
 	return value
+}
+
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return true, err
 }
