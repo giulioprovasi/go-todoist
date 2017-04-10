@@ -1,1 +1,1 @@
-web: todoist
+web: todo

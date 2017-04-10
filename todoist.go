@@ -1,4 +1,4 @@
-package todoist
+package main
 
 import (
 	"net/http"
