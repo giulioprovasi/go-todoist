@@ -30,6 +30,7 @@ angular
         // ------------- Private -------------
 
         var logError = function (data, status) {
+            alert('code ' + status + ': ' + data);
             console.log('code ' + status + ': ' + data);
             vm.working = false;
         };
@@ -44,7 +45,9 @@ angular
 
         function addTask() {
             vm.working = true;
-            $http.post('/task/', {Title: vm.todoText}).error(logError).success(function () {
+            $http.post('/task/', {Title: vm.todoText})
+                .error(logError)
+                .success(function () {
                 refresh();
             });
         }
